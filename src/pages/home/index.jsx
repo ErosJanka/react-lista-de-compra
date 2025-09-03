@@ -3,6 +3,7 @@
 
 import { useRef, useState } from "react"; //funciona para pegar referencia da onde quero (aqui para pegar o produto do input)
 import { v4 } from "uuid"; //gera varias chaves aleatorias, é bom para fazer listas no react que pede uma key
+import { AddBotao, Container, Produto, BotaoLixo } from './styles'
 
 function Home() {
   const [produtos, setProdutos] = useState([]); //A função vai colocar o valor dentro da variavel "produtos". No useState o valor inicial é um Array vazio. Poderia começar com uma palavra tipo 'abacate'
@@ -35,14 +36,14 @@ function Home() {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Lista de compras</h1>
 
       {/* Adiciona a tag <form> com o evento onSubmit */}
       <form onSubmit={cliqueiNoBotao}> 
         <input placeholder="Produto..." ref={inputRef} />{" "}
         {/* //pega o que esta escrito e coloca na referencia */}
-        <button type="submit">Adicionar</button> {/* Altera o tipo do botão para 'submit' */}
+        <AddBotao type="submit">Adicionar</AddBotao> {/* Altera o tipo do botão para 'submit' */}
       </form>
 
       {//o {} é para colocar codigo JS no html
@@ -50,14 +51,14 @@ function Home() {
         (
           produto //adiciona os produtos no array "produtos"
         ) => (
-          <div key={produto.id}>
+          <Produto key={produto.id}>
             <p>{produto.nome}</p>
-            <button onClick={() => deletar(produto.id)}>🗑️</button>
-          </div>
+            <BotaoLixo onClick={() => deletar(produto.id)}>🗑️</BotaoLixo>
+          </Produto>
         )
       ) //map pega item por item e faz o que quiser com ele
       }
-    </div>
+    </Container>
   );
 }
 
